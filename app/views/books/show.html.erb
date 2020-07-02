@@ -39,6 +39,7 @@
 						<% end %>
 					</td>
 					<% end %>
+					<td>コメント数:<%= @book.book_comments.count %></td>
 					<!-- ログインユーザーのみ編集、削除 -->
 					<% if @book.user == current_user %>
 						<td><%= link_to "Edit", edit_book_path(@book), class: "btn-sm btn-success edit_book_#{@book.id}" %></td>
