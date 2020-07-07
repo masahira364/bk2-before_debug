@@ -1,10 +1,11 @@
 class BooksController < ApplicationController
-  before_action :correct_user, only: [:edit, :update]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   def show
     @book = Book.find(params[:id])
     @book_new = Book.new
     @book_comment = BookComment.new
+    @book_comments = @book.book_comments
   end
 
   def index
@@ -24,10 +25,7 @@ class BooksController < ApplicationController
   end
 
   def edit
-    @book = Book.find(params[:id])
   end
-
-
 
   def update
     @book = Book.find(params[:id])
@@ -39,7 +37,6 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    @book = Book.find(params[:id])
     @book.destroy
     redirect_to books_path, notice: "You have deleted book successfully."
   end
@@ -51,8 +48,8 @@ class BooksController < ApplicationController
   end
 
   def correct_user
-    @book = current_user.books.find_by(id: params[:id])
-    unless @book
+    @book = Book.find(params[:id])
+    unless @book == current_user
       redirect_to books_path
     end
   end
