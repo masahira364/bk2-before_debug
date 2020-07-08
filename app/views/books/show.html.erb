@@ -13,36 +13,18 @@
 	<div class="col-xs-9">
 		<h2>Book detail</h2>
 
-		<table class="table">
-				<tr>
-					<td>
-						<%= link_to user_path(@book.user) do %>
-							<%= attachment_image_tag(@book.user, :profile_image, :fill, 100, 100, fallback: "no-image-mini.jpg") %><br>
-						<%= @book.user.name %>
-						<% end %>
-					</td>
-					<td><%= link_to @book.title, book_path(@book) %></td>
-					<td><%= @book.body %></td>
-
-					<td id="favorite_<%= @book.id %>">
-						<%= render 'favorites/favorite', book: @book %>
-					</td>
-					<td>コメント数:<%= @book.book_comments.count %></td>
-					<!-- ログインユーザーのみ編集、削除 -->
-					<% if @book.user == current_user %>
-						<td><%= link_to "Edit", edit_book_path(@book), class: "btn-sm btn-success edit_book_#{@book.id}" %></td>
-						<td><%= link_to "Destroy", book_path(@book), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book_#{@book.id}" %></td>
-					<% end %>
-					<!-- ログインユーザーのみ編集、削除 -->
+			<table class="table" >
+				<tr id="book_<%= @book.id %>">
+					<%= render 'show', book: @book %>
 				</tr>
 			</table>
 			<!-- コメント表示 -->
-			<table id="comment_area">
-			    <%= render 'book_comments/index', book_comments: @book_comments %>
+			<table id="comment_<%= @book.id %>">
+			    <%= render 'comment', book_comments: @book.book_comments %>
 		    </table>
 			<!-- コメント表示 -->
 			<!-- コメント投稿 -->
-			<%= render 'book_comments/comment_form', book: @book, book_comment: @book_comment %>
+			<%= render 'form', book: @book, book_comment: @book_comment %>
 			<!-- コメント投稿 -->
 
 	</div>

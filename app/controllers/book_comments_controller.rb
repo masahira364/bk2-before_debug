@@ -4,8 +4,8 @@ class BookCommentsController < ApplicationController
   	@book_comment = @book.book_comments.new(book_comment_params)
   	@book_comment.user_id = current_user.id
   	if @book_comment.save
-       @book_comments = @book.book_comments
-       render :index
+      flash[:success] = "Comment was successfully created."
+
   	else
   		@book_new = Book.new
   		@book_comments = BookComment.where(book_id: @book.id)
@@ -18,8 +18,6 @@ class BookCommentsController < ApplicationController
   	@book_comment = BookComment.find(params[:id])
   	if @book_comment.user == current_user
   		@book_comment.destroy
-      @book_comments = @book.book_comments
-       render :index
   	end
   end
 
