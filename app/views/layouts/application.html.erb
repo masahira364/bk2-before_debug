@@ -37,6 +37,23 @@
 
     <div class="container">
       <p id="notice"><%= notice %></p>
+
+      <!-- 検索フォーム -->
+      <div class="row">
+        <div class="col-xs-6 col-xs-offset-3">
+          <% if user_signed_in? %>
+            <div class="search-form">
+              <%= form_tag(search_path, method: :get) do %>
+                <%= text_field_tag :search %>
+                <%= select_tag(:model, options_for_select([["User", "1"], ["Book", "2"]])) %>
+                <%= select_tag(:how, options_for_select([["完全一致", "match"], ["前方一致", "forward"], ["後方一致", "backward"], ["部分一致", "partical"]])) %>
+                <%= submit_tag '検索', class:'btn btn-default' %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
       <%= yield %>
     </div>
 
