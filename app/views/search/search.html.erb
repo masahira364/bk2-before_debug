@@ -1,6 +1,6 @@
 <!-- User検索 -->
 <% if @user_or_book == "1" %>
-  <h1>User serach for params(:search)</h1>
+  <h1>User search for '<%= @search %>'</h1>
   <table class="table">
   	<thead>
   		<tr>
@@ -32,7 +32,7 @@
 
 <!-- Book検索 -->
 <% elsif @user_or_book == "2" %>
-	<h1>Book search for '#{search}'</h1>
+	<h1>Book search for '<%= @search %>'</h1>
 	<table class="table table-hover table-inverse">
 			<thead>
 				<tr>
